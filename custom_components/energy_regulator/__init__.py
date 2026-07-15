@@ -5,7 +5,7 @@ from .controller import EnergyRegulatorController
 from .const import DOMAIN
 from .store import Store
 
-PLATFORMS = ["switch", "number"]
+PLATFORMS = ["switch", "number", "sensor"]
 
 
 async def async_setup(hass: HomeAssistant, config: dict):

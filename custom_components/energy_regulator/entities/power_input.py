@@ -1,5 +1,6 @@
 from homeassistant.components.number import NumberEntity
 from homeassistant.const import UnitOfPower
+from homeassistant.components.number import NumberMode
 
 class ManualPowerNumber(NumberEntity):
 
@@ -8,6 +9,7 @@ class ManualPowerNumber(NumberEntity):
     _attr_native_max_value = 800
     _attr_native_step = 1
     _attr_native_unit_of_measurement = UnitOfPower.WATT
+    _attr_mode = NumberMode.SLIDER
 
     def __init__(self, hass, entry):
         self.hass = hass
