@@ -16,14 +16,20 @@ class ConnectorService:
                 },
                 blocking=True,
             )
+        else:
+            print(f"Number entity {entity_id} not found. Please ensure the number entity exists and is named correctly.")
     
     async def set_mqtt_mode(self, entity_id: str):
-        await self.hass.services.async_call(
-            "select",
-            "select_option",
-            {
-                "entity_id": f"{entity_id}_mqtt_select",
-                "option": "mqtt_ctrl"
-            },
-            blocking=True,
-        )
+        select_entity = self.hass.states.get(f"{entity_id}_mqtt_select")
+        if select_entity:
+            await self.hass.services.async_call(
+                "select",
+                "select_option",
+                {
+                    "entity_id": f"{entity_id}_mqtt_select",
+                    "option": "mqtt_ctrl"
+                },
+                blocking=True,
+            )
+        else:
+            print(f"Select entity for {entity_id} not found. Please ensure the select entity exists and is named correctly.")
