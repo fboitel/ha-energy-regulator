@@ -37,12 +37,12 @@ class EnergyRegulatorController:
             self.store.shelly_power = float(state.state)
             
         self.battery_service.update_power()
-        self.send_battery_powers()
+        await self.send_battery_powers()
 
-    def send_battery_powers(self):
+    async def send_battery_powers(self):
         for battery in BATTERIES.keys():
             if battery in self.store.active_batteries:
                 power = self.store.battery_powers[battery]
                 entity_id = BATTERIES[battery]
-                self.connector_service.send_number(entity_id, power)
-                self.connector_service.set_mqtt_mode(entity_id)
+                await self.connector_service.send_number(entity_id, power)
+                await self.connector_service.set_mqtt_mode(entity_id)

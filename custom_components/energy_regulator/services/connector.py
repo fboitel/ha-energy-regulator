@@ -4,10 +4,10 @@ class ConnectorService:
     def __init__(self, hass):
         self.hass = hass
 
-    def send_number(self, entity_id: str, value: float):
+    async def send_number(self, entity_id: str, value: float):
         number_entity = self.hass.states.get(entity_id)
         if number_entity:
-            self.hass.services.call(
+            await self.hass.services.async_call(
                 "number",
                 "set_value",
                 {
@@ -16,8 +16,8 @@ class ConnectorService:
                 },
             )
     
-    def set_mqtt_mode(self, entity_id: str):
-        self.hass.services.call(
+    async def set_mqtt_mode(self, entity_id: str):
+        await self.hass.services.async_call(
             "select",
             "select_option",
             {
