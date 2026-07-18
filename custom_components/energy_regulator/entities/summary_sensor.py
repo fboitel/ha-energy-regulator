@@ -7,6 +7,7 @@ class SummarySensor(SensorEntity):
 
     _attr_name = "Aperçu"
 
+
     def __init__(self, store):
         self.store = store
 
@@ -20,7 +21,7 @@ class SummarySensor(SensorEntity):
 
     @property
     def native_value(self):
-        return "Auto=%s Manuel=%.2f Shelly=%.2f %s Interval%s" % (
+        return "Auto=%s Manuel=%.2f Shelly=%.2f %s Interval:%s" % (
             self.store.automatic_mode,
             self.store.manual_power,
             self.store.shelly_power,
