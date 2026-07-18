@@ -11,7 +11,7 @@ class ConnectorService:
                 "number",
                 "set_value",
                 {
-                    "entity_id": f"{entity_id}",
+                    "entity_id": f"number.{entity_id}",
                     "value": value
                 },
                 blocking=True,
@@ -26,7 +26,7 @@ class ConnectorService:
                 "select",
                 "select_option",
                 {
-                    "entity_id": f"{entity_id}_mqtt_select",
+                    "entity_id": f"select.{entity_id}_mqtt_select",
                     "option": "mqtt_ctrl"
                 },
                 blocking=True,
