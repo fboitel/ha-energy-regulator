@@ -1,2 +1,18 @@
 DOMAIN = "energy_regulator"
+
 SHELLY_DEVICE_ID = "sensor.shellypro3em63_e08cfe958144_energy_meter_2_puissance"
+
+BATTERIES = {
+    "L1.1B0260": "msa_280426120260",
+    "L1.2B1307": "msa_280426121307",
+    "L1.3B1413": "msa_280426121413",
+    "L2.4B0179": "msa_280426120179",
+    "L2.5B1292": "msa_280426121292",
+    "L3.6B1445": "msa_280426121445",
+    "L3.7B0956": "msa_280426120956",
+}
+
+MAX_BATTERY_POWER = 500.0 
+MIN_BATTERY_POWER = -400.0
+
+TICK_INTERVAL = 5

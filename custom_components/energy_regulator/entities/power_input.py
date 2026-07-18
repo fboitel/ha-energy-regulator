@@ -5,8 +5,8 @@ from homeassistant.components.number import NumberMode
 class ManualPowerNumber(NumberEntity):
 
     _attr_name = "Puissance manuelle"
-    _attr_native_min_value = -800
-    _attr_native_max_value = 800
+    _attr_native_min_value = -4000
+    _attr_native_max_value = 4000
     _attr_native_step = 1
     _attr_native_unit_of_measurement = UnitOfPower.WATT
     _attr_mode = NumberMode.SLIDER

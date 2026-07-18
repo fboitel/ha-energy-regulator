@@ -1,5 +1,4 @@
-from .entities.summary_sensor import SummarySensor
-from .entities.shelly_power_sensor import ShellyPowerSensor
+from .entities.active_batteries_text import ActiveBatteriesText
 
 from .const import DOMAIN
 
@@ -8,6 +7,5 @@ async def async_setup_entry(hass, entry, async_add_entities):
     store = hass.data[DOMAIN][entry.entry_id]["store"]
 
     async_add_entities([
-        ShellyPowerSensor(store),
-        SummarySensor(store)
+        ActiveBatteriesText(store),
     ])

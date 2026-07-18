@@ -5,7 +5,7 @@ from .controller import EnergyRegulatorController
 from .const import DOMAIN
 from .store import Store
 
-PLATFORMS = ["switch", "number", "sensor"]
+PLATFORMS = ["switch", "number", "sensor", "text"]
 
 
 async def async_setup(hass: HomeAssistant, config: dict):
@@ -21,9 +21,9 @@ async def async_setup_entry(
     hass.data.setdefault(DOMAIN, {})
 
     hass.data[DOMAIN].setdefault(entry.entry_id, {})
+    hass.data[DOMAIN][entry.entry_id]["store"] = Store()
     controller = EnergyRegulatorController(hass, entry)
     hass.data[DOMAIN][entry.entry_id]["controller"] = controller
-    hass.data[DOMAIN][entry.entry_id]["store"] = Store()
 
     await controller.async_start()
 
