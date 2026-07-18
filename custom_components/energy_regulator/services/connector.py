@@ -5,7 +5,7 @@ class ConnectorService:
         self.hass = hass
 
     async def send_number(self, entity_id: str, value: float):
-        number_entity = self.hass.states.get(entity_id)
+        number_entity = self.hass.states.get(f"number.{entity_id}")
         if number_entity:
             await self.hass.services.async_call(
                 "number",
@@ -20,7 +20,7 @@ class ConnectorService:
             print(f"Number entity {entity_id} not found. Please ensure the number entity exists and is named correctly.")
     
     async def set_mqtt_mode(self, entity_id: str):
-        select_entity = self.hass.states.get(f"{entity_id}_mqtt_select")
+        select_entity = self.hass.states.get(f"select.{entity_id}_mqtt_select")
         if select_entity:
             await self.hass.services.async_call(
                 "select",
