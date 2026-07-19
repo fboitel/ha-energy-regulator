@@ -1,7 +1,5 @@
 from random import random
 
-from numpy import power
-
 from ..const import MAX_BATTERY_POWER, MIN_BATTERY_POWER, DEAD_BAND
 
 class BatteryService:
@@ -17,7 +15,7 @@ class BatteryService:
         if abs(self.filtered_grid_power) < DEAD_BAND:
             return
         
-        self.battery_command += 0.3 * self.filtered_grid_power + (random.choice([-0.1, 0.1]))
+        self.battery_command += 0.3 * self.filtered_grid_power + (random.randint(-1, 1) / 10)
 
     def set_power(self):
         battery_count = len(self.store.active_batteries)
