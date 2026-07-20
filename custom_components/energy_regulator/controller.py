@@ -63,7 +63,6 @@ class EnergyRegulatorController:
                 power = self.store.battery_powers[battery]
                 entity_id = BATTERIES[battery]
                 try:
-                    print(f"Sending power {power} to {entity_id}")
                     await self.connector_service.send_number(entity_id, power)
                 except Exception as e:
                     _LOGGER.error(f"Error sending power to {entity_id}: {e}")

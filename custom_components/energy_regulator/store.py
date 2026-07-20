@@ -12,3 +12,6 @@ class Store:
     active_batteries: list[str] = field(
         default_factory=lambda: [key for key in BATTERIES]
     )
+    overall_battery_command: float = 0.0
+    filtered_grid_power: float = 0.0
+    grid_power: float = 0.0

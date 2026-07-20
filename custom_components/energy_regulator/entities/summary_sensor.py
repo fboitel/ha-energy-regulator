@@ -21,10 +21,13 @@ class SummarySensor(SensorEntity):
 
     @property
     def native_value(self):
-        return "Auto=%s Manuel=%.2f Shelly=%.2f %s Interval:%s" % (
+        return "Auto=%s Manuel=%.2f Shelly=%.2f %s Interval:%s Overall=%.2f Filtered=%.2f Grid=%.2f" % (
             self.store.automatic_mode,
             self.store.manual_power,
             self.store.shelly_power,
             self.battery_summary(),
             TICK_INTERVAL,
+            self.store.overall_battery_command,
+            self.store.filtered_grid_power,
+            self.store.grid_power,
         )
