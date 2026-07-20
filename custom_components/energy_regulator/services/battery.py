@@ -16,7 +16,7 @@ class BatteryService:
             self.store.grid_power = power
             return
         
-        self.battery_command += 0.3 * self.filtered_grid_power
+        self.battery_command = 0.7 * self.battery_command + 0.3 * self.filtered_grid_power 
 
         if (self.battery_command % 1) < 0.5:
             self.battery_command += 0.1
