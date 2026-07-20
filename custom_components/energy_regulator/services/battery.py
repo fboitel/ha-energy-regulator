@@ -11,6 +11,9 @@ class BatteryService:
         self.filtered_grid_power = (self.filtered_grid_power * 0.8) + (power * 0.2)
 
         if abs(self.filtered_grid_power) < DEAD_BAND:
+            self.store.overall_battery_command = self.battery_command
+            self.store.filtered_grid_power = self.filtered_grid_power
+            self.store.grid_power = power
             return
         
         self.battery_command += 0.3 * self.filtered_grid_power
@@ -19,6 +22,11 @@ class BatteryService:
             self.battery_command += 0.1
         else:
             self.battery_command -= 0.1
+
+        self.store.overall_battery_command = self.battery_command
+        self.store.filtered_grid_power = self.filtered_grid_power
+        self.store.grid_power = power
+        
 
     def set_power(self):
         battery_count = len(self.store.active_batteries)
