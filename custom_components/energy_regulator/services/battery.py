@@ -1,4 +1,4 @@
-from ..const import MAX_BATTERY_POWER, MIN_BATTERY_POWER, DEAD_BAND
+from ..const import MAX_BATTERY_POWER, MIN_BATTERY_POWER, INTEGRAL_GAIN
 
 class BatteryService:
     # Use a smart algorithm to order the battery charge/discharge based on the current grid power.
@@ -8,21 +8,16 @@ class BatteryService:
         self.filtered_grid_power = 0
 
     def compute_power(self, power: float):
-        self.filtered_grid_power = (self.filtered_grid_power * 0.8) + (power * 0.2)
-
-        if abs(self.filtered_grid_power) < DEAD_BAND:
-            self.store.overall_battery_command = self.battery_command
-            self.store.filtered_grid_power = self.filtered_grid_power
-            self.store.grid_power = power
-            return
+        self.filtered_grid_power = (
+            0.5 * self.filtered_grid_power +
+            0.5 * power
+        )
+        self.battery_command += INTEGRAL_GAIN * self.filtered_grid_power
+        self.battery_command = max(
+            MIN_BATTERY_POWER,
+            min(MAX_BATTERY_POWER, self.battery_command)
+        )
         
-        self.battery_command = 0.7 * self.battery_command + 0.3 * self.filtered_grid_power 
-
-        if (self.battery_command % 1) < 0.5:
-            self.battery_command += 0.1
-        else:
-            self.battery_command -= 0.1
-
         self.store.overall_battery_command = self.battery_command
         self.store.filtered_grid_power = self.filtered_grid_power
         self.store.grid_power = power
